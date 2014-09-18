@@ -4,11 +4,10 @@ include includes.mk
 
 .PHONY: all run clean push create shell build destroy
 
-check-rootfs:
-	@test -s ./rootfs.tar || { echo "GNU sort does not exist! Exiting..."; exit 1; }
 
-all: check-rootfs
-
+all: 
+	@echo make build
+	
 push:
 	sudo docker push
 

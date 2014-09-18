@@ -5,12 +5,6 @@ include includes.mk
 
 .PHONY: all run clean push create shell build destroy
 
-check-rootfs:
-ifeq (,$(wildcard ./rootfs.tar))
-	$(call build_tarmaker)
-endif
-	@echo "File: rootfs.tar is exist!"
-
 all: check-rootfs
 
 push:

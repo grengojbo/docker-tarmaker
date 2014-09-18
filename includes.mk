@@ -18,3 +18,9 @@ define build_tarmaker
 	@sudo chown 1000:1000 rootfs*
 	@sudo docker rm -f builder-${NAME}
 endef
+
+check-rootfs:
+ifeq (,$(wildcard ./rootfs.tar))
+	$(call build_tarmaker)
+endif
+	@echo "File: rootfs.tar is exist!"
