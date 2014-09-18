@@ -1,10 +1,14 @@
-NAME=lsyncd
-TAG_IMG=latest
-IMAGE_NAME = grengojbo/${NAME}
+#
 
-.PHONY: all run clean push create shell build destroy make_trans syncdb compile_trans static
+include includes.mk
 
-all: push
+.PHONY: all run clean push create shell build destroy
+
+define check-rootfs
+	test -s ./rootfs.tar || { echo "GNU sort does not exist! Exiting..."; exit 1; }
+endef
+
+all: check-rootfs
 
 push:
 	sudo docker push
@@ -16,8 +20,7 @@ run:
 	sudo docker run --rm -v /storage/tarmaker-${NAME}:/storage/tarmaker-${NAME} --name tarmaker-${NAME} -i -t tarmaker:${NAME} /bin/bash
 
 clean:
-	#docker rmi ${IMAGE_NAME}
-	deis apps:destroy --app=${NAME} --confirm=${NAME}
+	@sudo docker rmi ${IMAGE_NAME}:${TAG_IMG}
 
 create:
 	@sudo docker build -t tarmaker:${NAME} tarmaker
@@ -28,4 +31,9 @@ create:
 	@echo image: ${IMAGE_NAME} size:  MB
 
 build:
-	@sudo docker build -t ${IMAGE_NAME}:${TAG_IMG} .
+	@sudo docker build -t ${IMAGE_NAME}:${TAG_IMG} . || {
+    echo "Something went wrong. Aborting."
+    exit 1
+}
+
+

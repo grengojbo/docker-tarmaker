@@ -1,13 +1,14 @@
 # Dockerfile for grengojbo/tarmaker:python using buildroot
-FROM            grengojbo/tarmaker
+FROM            grengojbo/tarmaker:latest
 MAINTAINER      Oleg Dolya "oleg.dolya@gmail.com"
 
 # Install packages
-ENV             DEBIAN_FRONTEND noninteractive
+#ENV             DEBIAN_FRONTEND noninteractive
+
 #RUN RUN             apt-get -q update && apt-get -qyV install \
 #                    --no-install-recommends && apt-get -y autoremove && apt-get -y autoclean && apt-get -y clean
 
-RUN             env --unset=DEBIAN_FRONTEND
+#RUN             env --unset=DEBIAN_FRONTEND
 
 WORKDIR         /tmp/builder/buildroot
 

@@ -2,19 +2,19 @@
 #
 # VERSION               0.1.4
 
-FROM     grengojbo/base:latest
+# Golang base host
+#
+# VERSION               0.1.4
+
+FROM       grengojbo/tarmaker:latest
 MAINTAINER Oleg Dolya "oleg.dolya@gmail.com"
 
-# Install software
-RUN apt-get update && apt-get install --no-install-recommends -yq \
-        autoconf \
-        build-essential \
-        procps \
-        bzr \
-        cvs \
-        git \
-        mercurial \
-        subversion && apt-get -y autoremove && apt-get -y autoclean && apt-get -y clean
+#ENV             DEBIAN_FRONTEND noninteractive
+
+#RUN RUN             apt-get -q update && apt-get -qyV install \
+#                    --no-install-recommends && apt-get -y autoremove && apt-get -y autoclean && apt-get -y clean
+
+#RUN             env --unset=DEBIAN_FRONTEND
 
 # prepare go environment
 ENV GOROOT /usr/local/go
@@ -23,11 +23,6 @@ ENV GOPATH /go
 RUN mkdir -p $GOPATH
 RUN mkdir -p $GOPATH/src
 ENV PATH $GOROOT/bin:$GOPATH/bin:$PATH
-
-# install go
-RUN curl -sk https://storage.googleapis.com/golang/go1.3.src.tar.gz | tar -C $GOROOT -xzf - --strip-components 1 \
-  && cd /usr/local/go/src && ./make.bash --no-clean 2>&1
-#&& rm -Rf /usr/local/go/src
 
 WORKDIR $GOPATH/src
 RUN go get github.com/kr/godep

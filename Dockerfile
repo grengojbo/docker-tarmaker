@@ -60,6 +60,19 @@ RUN apt-get install -y --no-install-recommends \
 
 RUN             env --unset=DEBIAN_FRONTEND
 
+# prepare go environment
+ENV GOROOT /usr/local/go
+RUN mkdir -p $GOROOT
+ENV GOPATH /go
+RUN mkdir -p $GOPATH
+RUN mkdir -p $GOPATH/src
+ENV PATH $GOROOT/bin:$GOPATH/bin:$PATH
+
+# install go
+RUN curl -sk https://storage.googleapis.com/golang/go1.3.src.tar.gz | tar -C $GOROOT -xzf - --strip-components 1 \
+  && cd /usr/local/go/src && ./make.bash --no-clean 2>&1
+  
+
 # Create directories
 RUN             mkdir -p /tmp/builder
 WORKDIR         /tmp/builder
