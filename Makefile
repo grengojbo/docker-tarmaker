@@ -4,9 +4,8 @@ include includes.mk
 
 .PHONY: all run clean push create shell build destroy
 
-define check-rootfs
-	test -s ./rootfs.tar || { echo "GNU sort does not exist! Exiting..."; exit 1; }
-endef
+check-rootfs:
+	@test -s ./rootfs.tar || { echo "GNU sort does not exist! Exiting..."; exit 1; }
 
 all: check-rootfs
 
@@ -31,9 +30,5 @@ create:
 	@echo image: ${IMAGE_NAME} size:  MB
 
 build:
-	@sudo docker build -t ${IMAGE_NAME}:${TAG_IMG} . || {
-    echo "Something went wrong. Aborting."
-    exit 1
-}
-
+	@sudo docker build -t ${IMAGE_NAME}:${TAG_IMG} . || { echo "Something went wrong. Aborting."; exit 1; }
 

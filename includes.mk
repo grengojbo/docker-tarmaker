@@ -1,6 +1,6 @@
 ifndef NAME
 	NAME = tarmaker
-endef
+endif
 
 ifndef TAG_IMG
 	TAG_IMG = latest
