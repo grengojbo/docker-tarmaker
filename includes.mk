@@ -20,4 +20,4 @@ define build_tarmaker
 endef
 
 check-rootfs:
-	@test -s ./rootfs.tar || { echo "rootfs.tar does not exist! Exiting...";  echo "make create" exit 1; }
+	@test -s ./rootfs.tar || { echo "rootfs.tar does not exist! Exiting...";  echo "Run: make create"; exit 1; }
