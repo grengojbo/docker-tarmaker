@@ -20,7 +20,4 @@ define build_tarmaker
 endef
 
 check-rootfs:
-ifeq (,$(wildcard ./rootfs.tar))
-	$(call build_tarmaker)
-endif
-	@echo "File: rootfs.tar is exist!"
+	@test -s ./rootfs.tar || { echo "rootfs.tar does not exist! Exiting...";  echo "make create" exit 1; }
