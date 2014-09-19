@@ -21,7 +21,10 @@ ADD             buildroot-config /tmp/builder/buildroot/.config
 RUN             make oldconfig
 
 #RUN             sed -i 's/BR2_USE_MMU=y/# BR2_USE_MMU=y/' .config &&\
-RUN                echo BR2_PACKAGE_BASH=y >>.config
+RUN             echo BR2_PACKAGE_BASH=y >>.config
+RUN             echo BR2_PACKAGE_AUTOSSH=y >>.config
+RUN             echo BR2_PACKAGE_OPENSSH=y >>.config
+
 # Make
 RUN             make --quiet
 #RUN             make
