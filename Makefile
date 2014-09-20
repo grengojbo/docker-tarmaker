@@ -9,7 +9,7 @@ all:
 	@echo make build
 	
 push:
-	sudo docker push
+	sudo docker push ${IMAGE_NAME}:${TAG_IMG}
 
 shell:
 	sudo docker run --rm -v /storage:/storage --name ${NAME} -i -t ${IMAGE_NAME}:${TAG_IMG} /bin/bash
@@ -26,6 +26,7 @@ create:
 	@echo Run conteiners >  make shell
 	@sudo docker images | grep grengojbo/asssua | awk '{print $7}'
 	@echo ---------------------------------
+	@sudo docker images | grep ${IMAGE_NAME} | grep ${TAG_IMG} | awk '{print $7 $8}'
 	@echo image: ${IMAGE_NAME} size:  MB
 
 build:
