@@ -196,13 +196,24 @@ RUN             rm -rf \
                     locale
 # end rm git
 
+RUN git config --global http.sslVerify false
+WORKDIR         /usr/src
+
+RUN git clone https://github.com/axkibe/lsyncd.git
+WORKDIR         /usr/src/lsyncd
+RUN cmake . 
+# /usr/lib/x86_64-linux-gnu/liblua5.2.so;/usr/lib/x86_64-linux-gnu/libm.so
+RUN make && make install
+
 WORKDIR         /tmp/rootfs
 
 RUN mkdir -p /tmp/rootfs/usr/local/lib
 RUN mkdir -p /tmp/rootfs/usr/local/bin
+RUN mkdir -p /tmp/rootfs/usr/local/etc/lsyncd
 
-# /usr/lib/liblua5.2.so.0
-
+RUN cp /usr/lib/liblua5.2.so.0 /tmp/rootfs/usr/lib/liblua5.2.so.0
+RUN cp /usr/local/bin/lsyncd /tmp/rootfs/usr/local/bin/lsyncd
+RUN cp /usr/src/lsyncd/examples/*.lua /tmp/rootfs/usr/local/etc/lsyncd/
 RUN find /tmp/rootfs -name "*.a" -exec rm '{}' ';'
 
 
