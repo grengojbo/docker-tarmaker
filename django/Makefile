@@ -9,7 +9,7 @@ all: check-rootfs
 	make build
 
 push:
-	sudo docker push
+	sudo docker push ${IMAGE_NAME}:${TAG_IMG}
 
 shell:
 	sudo docker run --rm -v /storage:/storage --name ${NAME} -i -t ${IMAGE_NAME}:${TAG_IMG} /bin/bash
@@ -28,3 +28,4 @@ create:
 	
 build: check-rootfs
 	@sudo docker build -t ${IMAGE_NAME}:${TAG_IMG} .
+	$(shell IMG_SIZE=`docker images | grep ${IMAGE_NAME} | grep ${TAG_IMG} | awk '{print $7 $8}'`; echo "image: ${IMAGE_NAME} size: ${IMG_SIZE}")
