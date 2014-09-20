@@ -1,4 +1,19 @@
 #
+ifndef NAME
+	NAME = tarmaker
+endif
+
+ifndef TAG_IMG
+	TAG_IMG = latest
+endif
+
+ifndef IMAGE_REPO
+	IMAGE_REPO = grengojbo
+endif
+
+ifndef IMAGE_NAME
+	IMAGE_NAME = $(IMAGE_REPO)/$(NAME)
+endif
 
 include includes.mk
 
@@ -8,26 +23,11 @@ include includes.mk
 all: 
 	@echo make build
 	
-push:
-	sudo docker push ${IMAGE_NAME}:${TAG_IMG}
-
 shell:
 	sudo docker run --rm -v /storage:/storage --name ${NAME} -i -t ${IMAGE_NAME}:${TAG_IMG} /bin/bash
 
-run:
-	sudo docker run --rm -v /storage/tarmaker-${NAME}:/storage/tarmaker-${NAME} --name tarmaker-${NAME} -i -t tarmaker:${NAME} /bin/bash
-
 clean:
 	@sudo docker rmi ${IMAGE_NAME}:${TAG_IMG}
-
-create:
-	@sudo docker build -t tarmaker:${NAME} tarmaker
-	@sudo docker build -t ${IMAGE_NAME} .
-	@echo Run conteiners >  make shell
-	@sudo docker images | grep grengojbo/asssua | awk '{print $7}'
-	@echo ---------------------------------
-	@sudo docker images | grep ${IMAGE_NAME} | grep ${TAG_IMG} | awk '{print $7 $8}'
-	@echo image: ${IMAGE_NAME} size:  MB
 
 build:
 	@sudo docker build -t ${IMAGE_NAME}:${TAG_IMG} . || { echo "Something went wrong. Aborting."; exit 1; }

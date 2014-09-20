@@ -1,5 +1,5 @@
 ifndef NAME
-  NAME = mini
+  NAME = lsyncd
 endif
 
 ifndef TAG_IMG
