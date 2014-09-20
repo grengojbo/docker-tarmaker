@@ -10,8 +10,8 @@ ENV LIBRARY_PATH /usr/lib/mysql:/usr/local/lib/python2.7:/usr/lib/python2.7
 ENV LD_LIBRARY_PATH /usr/lib/mysql:/usr/local/lib/python2.7:/usr/lib/python2.7
 
 # set timezone /usr/share/zoneinfo/Europe/Kiev
-ADD ../localtime  /etc/localtime
-ADD ../timezone /etc/timezone
+ADD localtime  /etc/localtime
+ADD timezone /etc/timezone
 #ENV TZ Europe/Kiev
 #ENV TZ EEST
 
