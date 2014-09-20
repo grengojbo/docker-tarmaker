@@ -25,6 +25,13 @@ make run
 Создаем образ если хотим изменить тег TAG_IMG=<имя тега>
 ```bash
 make build
+OR
+TAG_IMG=1.5.9 make build
+```
+Публикуем образ на http://index.docker.io/
+```bash
+make build
+OR
 TAG_IMG=1.5.9 make build
 ```
 Удаляем созданные изображения

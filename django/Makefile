@@ -27,5 +27,6 @@ create:
 	$(call build_tarmaker)
 	
 build: check-rootfs
-	#sudo docker build -t ${IMAGE_NAME}:${TAG_IMG} .
-	@echo Size: $(shell sudo docker images | grep $(IMAGE_NAME) | grep $(TAG_IMG) | awk '{print $$7 $$8}')
+	@sudo docker build -t ${IMAGE_NAME}:${TAG_IMG} .
+	@echo ---------------------------------
+	@echo image: ${IMAGE_NAME}:${TAG_IMG} size: $(shell sudo docker images | grep $(IMAGE_NAME) | grep $(TAG_IMG) | awk '{print $$7 $$8}')

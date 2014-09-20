@@ -26,13 +26,7 @@ clean:
 create:
 	$(call build_tarmaker)
 	
-old:
-	@sudo docker build -t tarmaker:${NAME} tarmaker
-	@sudo docker build -t ${IMAGE_NAME} .
-	@echo Run conteiners >  make shell
-	@sudo docker images | grep grengojbo/asssua | awk '{print $7}'
-	@echo ---------------------------------
-	@echo image: ${IMAGE_NAME} size:  MB
-
 build: check-rootfs
-	@echo run build: sudo docker build -t ${IMAGE_NAME}:${TAG_IMG} .
+	@sudo docker build -t ${IMAGE_NAME}:${TAG_IMG} .
+	@echo ---------------------------------
+	@echo image: ${IMAGE_NAME}:${TAG_IMG} size: $(shell sudo docker images | grep $(IMAGE_NAME) | grep $(TAG_IMG) | awk '{print $$7 $$8}')
