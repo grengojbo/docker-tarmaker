@@ -22,9 +22,10 @@ make create
 ```bash
 make run
 ```
-
+Создаем образ если хотим изменить тег TAG_IMG=<имя тега>
 ```bash
 make build
+TAG_IMG=1.5.9 make build
 ```
 Удаляем созданные изображения
 ```bash
