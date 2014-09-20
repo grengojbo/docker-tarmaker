@@ -211,7 +211,7 @@ RUN mkdir -p /tmp/rootfs/usr/local/lib
 RUN mkdir -p /tmp/rootfs/usr/local/bin
 RUN mkdir -p /tmp/rootfs/usr/local/etc/lsyncd
 
-RUN cp /usr/lib/liblua5.2.so.0 /tmp/rootfs/usr/lib/liblua5.2.so.0
+RUN cp /usr/lib/x86_64-linux-gnu/liblua5.2.so.0 /tmp/rootfs/usr/lib/liblua5.2.so.0
 RUN cp /usr/local/bin/lsyncd /tmp/rootfs/usr/local/bin/lsyncd
 RUN cp /usr/src/lsyncd/examples/*.lua /tmp/rootfs/usr/local/etc/lsyncd/
 RUN find /tmp/rootfs -name "*.a" -exec rm '{}' ';'
