@@ -1,7 +1,7 @@
 #
 
-include ../includes.mk
 include includes.mk
+include ../includes.mk
 
 .PHONY: all run clean push create shell build destroy
 

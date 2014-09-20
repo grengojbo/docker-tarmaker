@@ -6,8 +6,8 @@ ADD             rootfs.tar /
 #WORKDIR /root
 
 # set timezone /usr/share/zoneinfo/Europe/Kiev
-ADD ../localtime  /etc/localtime
-ADD ../timezone /etc/timezone
+ADD localtime  /etc/localtime
+ADD timezone /etc/timezone
 #ENV TZ Europe/Kiev
 #ENV TZ EEST
 
