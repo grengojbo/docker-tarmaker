@@ -1,15 +1,3 @@
-ifndef NAME
-	NAME = tarmaker
-endif
-
-ifndef TAG_IMG
-	TAG_IMG = latest
-endif
-
-ifndef IMAGE_NAME
-	IMAGE_NAME = grengojbo/$(NAME)
-endif
-
 define build_tarmaker
 	@sudo docker build -t tarmaker:${NAME} tarmaker
 	@sudo docker run --name builder-${NAME} tarmaker:${NAME}
