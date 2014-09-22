@@ -3,10 +3,14 @@ MAINTAINER      MAINTAINER Oleg Dolya "oleg.dolya@gmail.com"
 
 ADD             rootfs.tar /
 
-RUN mkdir -p /data
+RUN mkdir -p /data/test1
+RUN mkdir -p /data/test2
 WORKDIR /data
 VOLUME ["/usr/local/etc/lsyncd"]
 VOLUME ["/data"]
+VOLUME ["/var/log"]
+ADD multi_targets.lua /data/test1/multi_targets.lua
+ADD config.lua /usr/local/etc/lsyncd/config.lua
 # set timezone /usr/share/zoneinfo/Europe/Kiev
 ADD localtime  /etc/localtime
 ADD timezone /etc/timezone
@@ -16,5 +20,5 @@ ADD timezone /etc/timezone
 # Can't `git pull` unless we set these
 # RUN             git config --global user.email "oleg.dolya@gmail.com" && git config --global user.name "grengojbo"
 
-CMD             ["/bin/bash"]
+CMD             ["/usr/local/bin/lsyncd", "/usr/local/etc/lsyncd/config.lua"]
 
