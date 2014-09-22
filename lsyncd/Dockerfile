@@ -21,4 +21,4 @@ ADD timezone /etc/timezone
 # RUN             git config --global user.email "oleg.dolya@gmail.com" && git config --global user.name "grengojbo"
 
 CMD             ["/usr/local/bin/lsyncd", "/usr/local/etc/lsyncd/config.lua"]
-
+# /usr/local/bin/lsyncd /usr/local/etc/lsyncd/config.lua

@@ -7,7 +7,7 @@ settings {
 
 sync{
   default.rsync,
-  source = "/storage/test1",
-  target = "/storage/test2",
+  source = "/data/test1",
+  target = "/data/test2",
   delete = false,
 }
