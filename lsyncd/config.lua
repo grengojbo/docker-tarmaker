@@ -10,4 +10,8 @@ sync{
   source = "/data/test1",
   target = "/data/test2",
   delete = false,
+  maxProcesses = 2,
+  rsync = {
+    rsh = "/usr/bin/ssh -p 22 -o StrictHostKeyChecking=no",
+  }
 }
