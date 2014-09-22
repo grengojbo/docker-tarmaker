@@ -12,7 +12,7 @@ targetlist = {
 for _, server in ipairs(targetlist) do
   sync{ default.rsync,
     source="/var/www/thomasjstein.com",
-  rsyncOps="-rltvupgo"
+    rsyncOps="-rltvupgo",
     target=server
   }
 end

@@ -5,10 +5,10 @@ ADD             rootfs.tar /
 
 RUN mkdir -p /data/test1
 RUN mkdir -p /data/test2
-WORKDIR /data
-VOLUME ["/usr/local/etc/lsyncd"]
-VOLUME ["/data"]
-VOLUME ["/var/log"]
+WORKDIR /root
+
+#cp /storage/deis /root/.ssh/id_rsa
+#cp -R /home/core/.ssh /root/
 ADD multi_targets.lua /data/test1/multi_targets.lua
 ADD config.lua /usr/local/etc/lsyncd/config.lua
 # set timezone /usr/share/zoneinfo/Europe/Kiev
@@ -20,5 +20,5 @@ ADD timezone /etc/timezone
 # Can't `git pull` unless we set these
 # RUN             git config --global user.email "oleg.dolya@gmail.com" && git config --global user.name "grengojbo"
 
-CMD             ["/usr/local/bin/lsyncd", "/usr/local/etc/lsyncd/config.lua"]
+CMD             ["/usr/local/bin/lsyncd", "/root/config.lua"]
 # /usr/local/bin/lsyncd /usr/local/etc/lsyncd/config.lua
