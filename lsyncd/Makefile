@@ -27,6 +27,9 @@ create:
 	$(call build_tarmaker)
 	
 build: check-rootfs
+	@test -s ./localtime || { cp ../localtime ./ && cp ../timezone ./; }
 	@sudo docker build -t ${IMAGE_NAME}:${TAG_IMG} .
 	@echo ---------------------------------
 	@echo image: ${IMAGE_NAME}:${TAG_IMG} size: $(shell sudo docker images | grep $(IMAGE_NAME) | grep $(TAG_IMG) | awk '{print $$7 $$8}')
+	@rm ./localtime
+	@rm ./timezone
