@@ -6,7 +6,7 @@ define build_tarmaker
 	@sudo chown 1000:1000 rootfs*
 	@sudo docker rm -f builder-${NAME}
 	@echo ---------------------------------
-	@echo image: tarmaker:${NAME} size: $(shell sudo docker images | grep $(IMAGE_NAME) | awk '{print $$7 $$8}')
+	@echo image: tarmaker:${NAME} size: $(shell sudo docker images | grep $(NAME) | grep $(TAG_IMG) | awk '{print $$7 $$8}')
 endef
 
 check-rootfs:
