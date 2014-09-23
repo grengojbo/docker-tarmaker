@@ -1,0 +1,20 @@
+[Unit]
+Description=lsyncd
+After=docker.service
+Requires=docker.service
+
+[Service]
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/docker kill lsyncd
+ExecStartPre=-/usr/bin/docker rm lsyncd
+ExecStartPre=IMAGE=grengojbo/lsyncd; docker history $IMAGE >/dev/null 2>&1 || docker pull $IMAGE
+ExecStart=docker run --rm -v /storage:/storage -v /root:/root --name lsyncd grengojbo/lsyncd
+ExecStopPost=/usr/bin/docker stop lsyncd
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+[X-Fleet]
+Conflicts=lsyncd-router.*.service
+X-ConditionMachineOf=

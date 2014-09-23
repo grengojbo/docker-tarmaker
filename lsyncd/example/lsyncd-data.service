@@ -1,0 +1,13 @@
+[Unit]
+Description=lsyncd-data
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/sh -c "docker inspect lsyncd-data >/dev/null 2>&1 || docker run --name lsyncd-data -v /var/lib/docker deis/base true"
+
+[Install]
+WantedBy=multi-user.target
+
+[X-Fleet]
+X-ConditionMachineMetadata=platform=deis

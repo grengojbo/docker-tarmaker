@@ -1,0 +1,16 @@
+[Unit]
+Description=lsyncd
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+RestartSec=10s
+ExecStartPre=-/usr/bin/docker kill lsyncd
+ExecStartPre=-/usr/bin/docker rm lsyncd
+ExecStartPre=/bin/sh -c "IMAGE=grengojbo/lsyncd; docker history $IMAGE >/dev/null 2>&1 || docker pull $IMAGE"
+ExecStart=/usr/bin/docker run --rm  -v /storage:/storage -v /root:/root --name lsyncd --privileged grengojbo/lsyncd
+ExecStopPost=/usr/bin/docker stop lsyncd
+
+[Install]
+WantedBy=multi-user.target

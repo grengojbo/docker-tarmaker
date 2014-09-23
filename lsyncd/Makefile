@@ -12,7 +12,7 @@ push:
 	sudo docker push ${IMAGE_NAME}:${TAG_IMG}
 
 shell:
-	sudo docker run --rm -v /storage:/storage --name ${NAME} -i -t ${IMAGE_NAME}:${TAG_IMG} /bin/bash
+	sudo docker run --rm -v /storage:/storage -v /root:/root --name ${NAME} -i -t ${IMAGE_NAME}:${TAG_IMG} /bin/bash
 
 run:
 	sudo docker run --rm -v /storage:/storage --name tarmaker-${NAME} -i -t tarmaker:${NAME} /bin/bash
