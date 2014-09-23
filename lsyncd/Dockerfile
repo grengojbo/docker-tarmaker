@@ -20,6 +20,8 @@ ADD timezone /etc/timezone
 # Can't `git pull` unless we set these
 # RUN             git config --global user.email "oleg.dolya@gmail.com" && git config --global user.name "grengojbo"
 EXPOSE 22
-ENTRYPOINT ["/usr/sbin/sshd"]
-CMD             ["/usr/local/bin/lsyncd", "/root/config.lua"]
+RUN mkdir -p /app/bin
+ADD bin/boot /app/bin/boot
+ENTRYPOINT ["/app/bin/boot"]
+CMD        ["/usr/local/bin/lsyncd", "/root/config.lua"]
 # /usr/local/bin/lsyncd /root/config.lua
