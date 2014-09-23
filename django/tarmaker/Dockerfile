@@ -245,7 +245,7 @@ RUN rm -R /tmp/rootfs/usr/share/locale
 RUN rm -R /tmp/rootfs/usr/share/git*
 RUN rm -R /tmp/rootfs/usr/share/ImageMagick-6
 RUN rm -R /tmp/rootfs/usr/share/perl
-RUN find /tmp/rootfs/usr/local/lib/ -name "*.py" -exec rm '{}' ';'
+# RUN find /tmp/rootfs/usr/local/lib/ -name "*.py" -exec rm '{}' ';'
 
 WORKDIR         /tmp/rootfs
 RUN             tar -pcf ../rootfs.tar .
