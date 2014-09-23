@@ -30,5 +30,4 @@ function on_exit() {
 trap on_exit INT TERM EXIT
 
 echo sshd running...
-
-wait
+exec $@
