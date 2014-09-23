@@ -4,12 +4,13 @@ After=docker.service
 Requires=docker.service
 
 [Service]
+EnvironmentFile=/etc/environment
 Restart=always
 RestartSec=10s
 ExecStartPre=-/usr/bin/docker kill lsyncd
 ExecStartPre=-/usr/bin/docker rm lsyncd
 ExecStartPre=/bin/sh -c "IMAGE=grengojbo/lsyncd; docker history $IMAGE >/dev/null 2>&1 || docker pull $IMAGE"
-ExecStart=/usr/bin/docker run --rm  -v /storage:/storage -v /root:/root --name lsyncd --privileged grengojbo/lsyncd
+ExecStart=/usr/bin/docker run --rm -p 2022:22 -e PUBLISH=22 -e HOST=$COREOS_PRIVATE_IPV4 -e PORT=2022 -v /storage:/storage -v /root:/root --name lsyncd --privileged grengojbo/lsyncd
 ExecStopPost=/usr/bin/docker stop lsyncd
 
 [Install]
