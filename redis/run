@@ -6,6 +6,6 @@
 # fail hard and fast even on pipelines
 set -eo pipefail
 
-sysctl vm.overcommit_memory=1 > /dev/null
+sysctl -e vm.overcommit_memory=1
 
 /app/bin/redis-server /etc/redis/redis.conf
