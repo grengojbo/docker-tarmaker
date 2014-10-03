@@ -1,10 +1,4 @@
 #!/bin/bash
-#
-# This script is designed to be run inside the container
-#
-
-# fail hard and fast even on pipelines
-set -eo pipefail
 
 sysctl -e vm.overcommit_memory=1
 

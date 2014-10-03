@@ -12,13 +12,13 @@ push:
 	sudo docker push ${IMAGE_NAME}:${TAG_IMG}
 
 shell:
-	sudo docker run --rm --name some-redis -it -p 6379:6380 ${IMAGE_NAME}:${TAG_IMG} /bin/bash
+	sudo docker run --rm --name some-redis -it -p 6379:6379 ${IMAGE_NAME}:${TAG_IMG} /bin/bash
 
 run:
-	sudo docker run --rm --name some-redis -d -p 6379:6380 ${IMAGE_NAME}:${TAG_IMG} 
+	sudo docker run --name some-redis -d -p 6379:6379 ${IMAGE_NAME}:${TAG_IMG} 
 
 cli:
-	sudo docker run --rm --name client-redis -it ${IMAGE_NAME}:${TAG_IMG} sh -c 'exec redis-cli -h "127.0.0.1" -p "6380"' 
+	sudo docker run --rm --name client-redis -it ${IMAGE_NAME}:${TAG_IMG} sh -c 'exec /app/bin/redis-cli -h "127.0.0.1" -p "6380"' 
 
 clean:
 	@sudo docker rmi tarmaker:${NAME}
