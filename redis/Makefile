@@ -3,7 +3,7 @@
 include includes.mk
 include ../includes.mk
 
-.PHONY: all run clean push create shell build destroy
+.PHONY: all run clean push create shell build destroy cli
 
 all: check-rootfs
 	make build
@@ -12,10 +12,13 @@ push:
 	sudo docker push ${IMAGE_NAME}:${TAG_IMG}
 
 shell:
-	sudo docker run --rm -v /storage:/storage --name ${NAME} -i -t ${IMAGE_NAME}:${TAG_IMG} /bin/bash
+	sudo docker run --rm --name some-redis -it -p 6379:6380 ${IMAGE_NAME}:${TAG_IMG} /bin/bash
 
 run:
-	sudo docker run --rm -v /storage:/storage --name tarmaker-${NAME} -i -t tarmaker:${NAME} /bin/bash
+	sudo docker run --rm --name some-redis -d -p 6379:6380 ${IMAGE_NAME}:${TAG_IMG} 
+
+cli:
+	sudo docker run --rm --name client-redis -it ${IMAGE_NAME}:${TAG_IMG} sh -c 'exec redis-cli -h "127.0.0.1" -p "6380"' 
 
 clean:
 	@sudo docker rmi tarmaker:${NAME}
@@ -26,7 +29,11 @@ clean:
 create:
 	$(call build_tarmaker)
 	
-build: check-rootfs
+build:
+	#test -s ./redis-dist.tar.gz || wget 
+	@test ! -s ./redis-dist.tar.gz || tar -xzf ./redis-dist.tar.gz
 	@sudo docker build -t ${IMAGE_NAME}:${TAG_IMG} .
+	@test ! -s ./redis-server || rm ./redis-s*
+	@test ! -s ./redis-cli || rm ./redis-c*
 	@echo ---------------------------------
 	@echo image: ${IMAGE_NAME}:${TAG_IMG} size: $(shell sudo docker images | grep $(IMAGE_NAME) | grep $(TAG_IMG) | awk '{print $$7 $$8}')

@@ -1,5 +1,5 @@
 ifndef NAME
-  NAME = mini
+  NAME = redis
 endif
 
 ifndef TAG_IMG
