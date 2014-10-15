@@ -14,6 +14,12 @@ ADD localtime  /etc/localtime
 ADD timezone /etc/timezone
 #ENV TZ Europe/Kiev
 #ENV TZ EEST
+ADD ceph/bin  /bin
+ADD ceph/etc  /etc
+ADD ceph/sbin  /sbin
+ADD ceph/usr  /usr
+ADD ceph/lib  /lib
+ADD ceph/var  /var
 
 # Can't `git pull` unless we set these
 # RUN             git config --global user.email "oleg.dolya@gmail.com" && git config --global user.name "grengojbo"

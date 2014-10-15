@@ -3,7 +3,7 @@ ifndef NAME
 endif
 
 ifndef TAG_IMG
-	TAG_IMG = latest
+	TAG_IMG = cephfuse
 endif
 
 ifndef IMAGE_REPO
